@@ -1,21 +1,21 @@
 CREATE TABLE Universities (
 	[code] VARCHAR(255) PRIMARY KEY,
-	[name] VARCHAR(255),
+	[name] VARCHAR(255) NOT NULL,
 	[website] VARCHAR(255)
 );
 
 CREATE TABLE Careers (
 	[id] INT IDENTITY (1,1) PRIMARY KEY,
-	[name] VARCHAR(255),
-	[description] VARCHAR(255),
-	[universityCode] VARCHAR(255)
+	[name] VARCHAR(255) NOT NULL,
+	[description] VARCHAR(255) NOT NULL,
+	[universityCode] VARCHAR(255) NOT NULL,
 );
 
 CREATE TABLE Courses (
 	[id] INT IDENTITY (1,1) PRIMARY KEY,
-	[name] VARCHAR(255),
-	[cost] FLOAT,
-	[careerId] INT
+	[name] VARCHAR(255) NOT NULL,
+	[cost] FLOAT NOT NULL,
+	[careerId] INT NOT NULL
 );
 
 ALTER TABLE Careers ADD FOREIGN KEY (universityCode) REFERENCES Universities;

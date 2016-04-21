@@ -27,9 +27,9 @@ namespace APIUniversities.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetByCode(string id)
+        public IHttpActionResult GetByCode(string universityId)
         {
-            UniversityModel university = uData.GetByCode(id);
+            UniversityModel university = uData.GetByCode(universityId);
 
             if(university == null)
             {
@@ -53,11 +53,12 @@ namespace APIUniversities.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult Update(string id, [FromBody] UniversityModel university)
+        public IHttpActionResult Update(string universityId, [FromBody] UniversityModel university)
         {
             if(university == null)
                 return BadRequest(Constants.MsgErrorArguments);
 
+            university.Code = universityId;
             bool updated = uData.Update(university);
             if (!updated)
                 return BadRequest(Constants.MsgError);
@@ -66,11 +67,11 @@ namespace APIUniversities.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult Delete(string id)
+        public IHttpActionResult Delete(string universityId)
         {
             UniversityModel university = new UniversityModel()
             {
-                Code = id
+                Code = universityId
             };
 
             bool deleted = uData.Delete(university);

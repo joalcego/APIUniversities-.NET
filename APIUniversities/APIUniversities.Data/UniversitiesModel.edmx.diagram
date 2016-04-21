@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6e0e46b1e73b489b8e06b3860d80ae25" Name="Diagram1">
-        <EntityTypeShape EntityType="UniversitiesModel.Career" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniversitiesModel.Cours" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniversitiesModel.University" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="UniversitiesModel.FK__Careers__univers__1BFD2C07" ManuallyRouted="false" />
-        <AssociationConnector Association="UniversitiesModel.FK__Courses__careerI__1CF15040" ManuallyRouted="false" />
+      <Diagram DiagramId="f209e49938c649e4b695e03cd370543d" Name="Diagram1">
+        <EntityTypeShape EntityType="UniversitiesModel.Careers" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversitiesModel.Courses" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversitiesModel.Universities" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="UniversitiesModel.FK__Careers__univers__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversitiesModel.FK__Courses__careerI__24927208" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

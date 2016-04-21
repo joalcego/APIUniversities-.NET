@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace APIUniversities.Data
 {
-    public class UniversitiesData : BaseData<UniversityModel, University>
+    public class UniversitiesData : BaseData<UniversityModel, Universities>
     {
         public UniversitiesData()
         {
@@ -16,13 +16,13 @@ namespace APIUniversities.Data
 
         #region Converters
 
-        internal override University Converter(UniversityModel model)
+        internal override Universities Converter(UniversityModel model)
         {
-            University entity = null;
+            Universities entity = null;
 
             if(model != null)
             {
-                entity = new University()
+                entity = new Universities()
                 {
                     code = model.Code,
                     name = model.Name,
@@ -33,7 +33,7 @@ namespace APIUniversities.Data
             return entity;
         }
 
-        internal override UniversityModel Converter(University entity)
+        internal override UniversityModel Converter(Universities entity)
         {
             UniversityModel model = null;
 
@@ -68,7 +68,7 @@ namespace APIUniversities.Data
             {
                 if (GetByCode(model.Code) == null)
                 {
-                    University university = Converter(model);
+                    Universities university = Converter(model);
 
                     if (university != null)
                     {
@@ -94,7 +94,7 @@ namespace APIUniversities.Data
         {
             try
             {
-                University university = Set.Where(x => x.code == model.Code).FirstOrDefault();
+                Universities university = Set.Where(x => x.code == model.Code).FirstOrDefault();
 
                 if (university != null)
                 {
@@ -116,7 +116,7 @@ namespace APIUniversities.Data
         {
             try
             {
-                University university = Set.Where(x => x.code == model.Code).FirstOrDefault();
+                Universities university = Set.Where(x => x.code == model.Code).FirstOrDefault();
 
                 if (university != null)
                 {

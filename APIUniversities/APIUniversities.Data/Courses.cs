@@ -12,17 +12,13 @@ namespace APIUniversities.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class University
+    public partial class Courses
     {
-        public University()
-        {
-            this.Careers = new HashSet<Career>();
-        }
-    
-        public string code { get; set; }
+        public int id { get; set; }
         public string name { get; set; }
-        public string website { get; set; }
+        public double cost { get; set; }
+        public int careerId { get; set; }
     
-        public virtual ICollection<Career> Careers { get; set; }
+        public virtual Careers Careers { get; set; }
     }
 }

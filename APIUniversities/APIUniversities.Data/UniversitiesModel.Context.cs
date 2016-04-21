@@ -25,8 +25,8 @@ namespace APIUniversities.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Career> Careers { get; set; }
-        public virtual DbSet<Cours> Courses { get; set; }
-        public virtual DbSet<University> Universities { get; set; }
+        public virtual DbSet<Careers> Careers { get; set; }
+        public virtual DbSet<Courses> Courses { get; set; }
+        public virtual DbSet<Universities> Universities { get; set; }
     }
 }

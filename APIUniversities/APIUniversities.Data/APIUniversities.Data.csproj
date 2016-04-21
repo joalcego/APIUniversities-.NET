@@ -49,11 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseData.cs" />
-    <Compile Include="Career.cs">
+    <Compile Include="Careers.cs">
       <DependentUpon>UniversitiesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CareersData.cs" />
-    <Compile Include="Cours.cs">
+    <Compile Include="CourseData.cs" />
+    <Compile Include="Courses.cs">
+      <DependentUpon>UniversitiesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Universities.cs">
       <DependentUpon>UniversitiesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UniversitiesData.cs" />
@@ -72,9 +76,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UniversitiesModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="University.cs">
-      <DependentUpon>UniversitiesModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

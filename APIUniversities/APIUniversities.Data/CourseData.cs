@@ -7,45 +7,45 @@ using System.Threading.Tasks;
 
 namespace APIUniversities.Data
 {
-    public class CareersData : BaseData<CareerModel, Careers>
+    public class CoursesData : BaseData<CourseModel, Courses>
     {
-        public CareersData()
+        public CoursesData()
         {
-            Set = DBContext.Careers;
+            Set = DBContext.Courses;
         }
 
         #region Converters
 
-        internal override Careers Converter(CareerModel model)
+        internal override Courses Converter(CourseModel model)
         {
-            Careers entity = null;
+            Courses entity = null;
 
             if (model != null)
             {
-                entity = new Careers()
+                entity = new Courses()
                 {
                     id = model.Id,
                     name = model.Name,
-                    description = model.Description,
-                    universityCode = model.UniversityCode
+                    cost = model.Cost,
+                    careerId = model.CareerId
                 };
             }
 
             return entity;
         }
 
-        internal override CareerModel Converter(Careers entity)
+        internal override CourseModel Converter(Courses entity)
         {
-            CareerModel model = null;
+            CourseModel model = null;
 
             if (entity != null)
             {
-                model = new CareerModel()
+                model = new CourseModel()
                 {
                     Id = entity.id,
                     Name = entity.name,
-                    Description = entity.description,
-                    UniversityCode = entity.universityCode
+                    Cost = entity.cost,
+                    CareerId = entity.careerId
                 };
             }
 
@@ -54,28 +54,28 @@ namespace APIUniversities.Data
 
         #endregion
 
-        public List<CareerModel> FindAll()
+        public List<CourseModel> FindAll()
         {
             return Set.ToList().ConvertAll(Converter);
         }
 
-        public List<CareerModel> FindByUniversity(string universityCode)
+        public List<CourseModel> FindByCareer(int careerId)
         {
-            return Set.Where(x => x.universityCode == universityCode).ToList().ConvertAll(Converter);
+            return Set.Where(x => x.careerId == careerId).ToList().ConvertAll(Converter);
         }
 
-        public CareerModel GetById(int id)
+        public CourseModel GetById(int id)
         {
             return Converter(Set.Find(id));
         }
 
-        public override bool Insert(CareerModel model)
+        public override bool Insert(CourseModel model)
         {
             try
             {
                 if (GetById(model.Id) == null)
                 {
-                    Careers career = Converter(model);
+                    Courses career = Converter(model);
 
                     if (career != null)
                     {
@@ -97,17 +97,17 @@ namespace APIUniversities.Data
             return true;
         }
 
-        public override bool Update(CareerModel model)
+        public override bool Update(CourseModel model)
         {
             try
             {
-                Careers career = Set.Find(model.Id);
+                Courses career = Set.Find(model.Id);
 
                 if (career != null)
                 {
                     career.name = model.Name;
-                    career.description = model.Description;
-                    career.universityCode = model.UniversityCode;
+                    career.cost = model.Cost;
+                    career.careerId = model.CareerId;
                     DBContext.SaveChanges();
                 }
             }
@@ -118,12 +118,12 @@ namespace APIUniversities.Data
 
             return true;
         }
-        
-        public override bool Delete(CareerModel model)
+
+        public override bool Delete(CourseModel model)
         {
             try
             {
-                Careers career = Set.Find(model.Id);
+                Courses career = Set.Find(model.Id);
 
                 if (career != null)
                 {

@@ -10,29 +10,29 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="255" />
-          <Property Name="description" Type="varchar" MaxLength="255" />
-          <Property Name="universityCode" Type="varchar" MaxLength="255" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="universityCode" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Courses">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="255" />
-          <Property Name="cost" Type="float" />
-          <Property Name="careerId" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="cost" Type="float" Nullable="false" />
+          <Property Name="careerId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Universities">
           <Key>
             <PropertyRef Name="code" />
           </Key>
           <Property Name="code" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="website" Type="varchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__Careers__univers__1BFD2C07">
-          <End Role="Universities" Type="Self.Universities" Multiplicity="0..1" />
+        <Association Name="FK__Careers__univers__239E4DCF">
+          <End Role="Universities" Type="Self.Universities" Multiplicity="1" />
           <End Role="Careers" Type="Self.Careers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Universities">
@@ -43,8 +43,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Courses__careerI__1CF15040">
-          <End Role="Careers" Type="Self.Careers" Multiplicity="0..1" />
+        <Association Name="FK__Courses__careerI__24927208">
+          <End Role="Careers" Type="Self.Careers" Multiplicity="1" />
           <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Careers">
@@ -59,11 +59,11 @@
           <EntitySet Name="Careers" EntityType="Self.Careers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Universities" EntityType="Self.Universities" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Careers__univers__1BFD2C07" Association="Self.FK__Careers__univers__1BFD2C07">
+          <AssociationSet Name="FK__Careers__univers__239E4DCF" Association="Self.FK__Careers__univers__239E4DCF">
             <End Role="Universities" EntitySet="Universities" />
             <End Role="Careers" EntitySet="Careers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Courses__careerI__1CF15040" Association="Self.FK__Courses__careerI__1CF15040">
+          <AssociationSet Name="FK__Courses__careerI__24927208" Association="Self.FK__Courses__careerI__24927208">
             <End Role="Careers" EntitySet="Careers" />
             <End Role="Courses" EntitySet="Courses" />
           </AssociationSet>
@@ -73,39 +73,39 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UniversitiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Career">
+        <EntityType Name="Careers">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="universityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="University" Relationship="Self.FK__Careers__univers__1BFD2C07" FromRole="Careers" ToRole="Universities" />
-          <NavigationProperty Name="Courses" Relationship="Self.FK__Courses__careerI__1CF15040" FromRole="Careers" ToRole="Courses" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="universityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Universities" Relationship="Self.FK__Careers__univers__239E4DCF" FromRole="Careers" ToRole="Universities" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK__Courses__careerI__24927208" FromRole="Careers" ToRole="Courses" />
         </EntityType>
-        <EntityType Name="Cours">
+        <EntityType Name="Courses">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="cost" Type="Double" />
-          <Property Name="careerId" Type="Int32" />
-          <NavigationProperty Name="Career" Relationship="Self.FK__Courses__careerI__1CF15040" FromRole="Courses" ToRole="Careers" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cost" Type="Double" Nullable="false" />
+          <Property Name="careerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Careers" Relationship="Self.FK__Courses__careerI__24927208" FromRole="Courses" ToRole="Careers" />
         </EntityType>
-        <EntityType Name="University">
+        <EntityType Name="Universities">
           <Key>
             <PropertyRef Name="code" />
           </Key>
           <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="website" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Careers" Relationship="Self.FK__Careers__univers__1BFD2C07" FromRole="Universities" ToRole="Careers" />
+          <NavigationProperty Name="Careers" Relationship="Self.FK__Careers__univers__239E4DCF" FromRole="Universities" ToRole="Careers" />
         </EntityType>
-        <Association Name="FK__Careers__univers__1BFD2C07">
-          <End Role="Universities" Type="Self.University" Multiplicity="0..1" />
-          <End Role="Careers" Type="Self.Career" Multiplicity="*" />
+        <Association Name="FK__Careers__univers__239E4DCF">
+          <End Role="Universities" Type="Self.Universities" Multiplicity="1" />
+          <End Role="Careers" Type="Self.Careers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Universities">
               <PropertyRef Name="code" />
@@ -115,9 +115,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Courses__careerI__1CF15040">
-          <End Role="Careers" Type="Self.Career" Multiplicity="0..1" />
-          <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+        <Association Name="FK__Courses__careerI__24927208">
+          <End Role="Careers" Type="Self.Careers" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Careers">
               <PropertyRef Name="id" />
@@ -128,14 +128,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="UniversitiesEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Careers" EntityType="Self.Career" />
-          <EntitySet Name="Courses" EntityType="Self.Cours" />
-          <EntitySet Name="Universities" EntityType="Self.University" />
-          <AssociationSet Name="FK__Careers__univers__1BFD2C07" Association="Self.FK__Careers__univers__1BFD2C07">
+          <EntitySet Name="Careers" EntityType="Self.Careers" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" />
+          <EntitySet Name="Universities" EntityType="Self.Universities" />
+          <AssociationSet Name="FK__Careers__univers__239E4DCF" Association="Self.FK__Careers__univers__239E4DCF">
             <End Role="Universities" EntitySet="Universities" />
             <End Role="Careers" EntitySet="Careers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Courses__careerI__1CF15040" Association="Self.FK__Courses__careerI__1CF15040">
+          <AssociationSet Name="FK__Courses__careerI__24927208" Association="Self.FK__Courses__careerI__24927208">
             <End Role="Careers" EntitySet="Careers" />
             <End Role="Courses" EntitySet="Courses" />
           </AssociationSet>
@@ -147,7 +147,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="UniversitiesModelStoreContainer" CdmEntityContainer="UniversitiesEntities">
           <EntitySetMapping Name="Careers">
-            <EntityTypeMapping TypeName="UniversitiesModel.Career">
+            <EntityTypeMapping TypeName="UniversitiesModel.Careers">
               <MappingFragment StoreEntitySet="Careers">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -157,7 +157,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="UniversitiesModel.Cours">
+            <EntityTypeMapping TypeName="UniversitiesModel.Courses">
               <MappingFragment StoreEntitySet="Courses">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -167,7 +167,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Universities">
-            <EntityTypeMapping TypeName="UniversitiesModel.University">
+            <EntityTypeMapping TypeName="UniversitiesModel.Universities">
               <MappingFragment StoreEntitySet="Universities">
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -189,7 +189,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
