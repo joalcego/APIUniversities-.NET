@@ -1,4 +1,6 @@
-﻿using APIUniversities.Models;
+﻿using APIUniversities.Data;
+using APIUniversities.Infrastructure;
+using APIUniversities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,23 +12,24 @@ namespace APIUniversities.Controllers
 {
     public class UniversitiesController : ApiController
     {
-        private List<UniversityModel> universities = new List<UniversityModel>()
+        private static UniversitiesData uData;
+
+        public UniversitiesController()
         {
-            new UniversityModel { Code = "CFT", Name="Universidad Cenfotec", Website="www.ucenfotec.ac.cr"},
-            new UniversityModel { Code = "LTN", Name="Universidad Latina", Website="www.ulatina.ac.cr"},
-            new UniversityModel { Code="UND", Name="Universidad Estatal a Distancia", Website="www.uned.ac.cr"}
-        };
+            if (uData == null)
+                uData = new UniversitiesData();
+        }
 
         [HttpGet]
         public IEnumerable<UniversityModel> FindAll()
         {
-            return universities;
+            return uData.FindAll();
         }
 
         [HttpGet]
         public IHttpActionResult GetByCode(string id)
         {
-            UniversityModel university = universities.Where(x => x.Code == id).FirstOrDefault();
+            UniversityModel university = uData.GetByCode(id);
 
             if(university == null)
             {
@@ -40,44 +43,42 @@ namespace APIUniversities.Controllers
         public IHttpActionResult Create([FromBody] UniversityModel university)
         {
             if(university == null)
-            {
-                return BadRequest("No arguments were passed");
-            }
+                return BadRequest(Constants.MsgErrorArguments);
 
-            //no data is saved here, this is just an example
-            universities.Add(university);
+            bool inserted = uData.Insert(university);
+            if (!inserted)
+                return BadRequest(Constants.MsgError);
 
-            return Ok("Created successfully!");
+            return Ok(Constants.MsgSuccess);
         }
 
         [HttpPut]
         public IHttpActionResult Update(string id, [FromBody] UniversityModel university)
         {
             if(university == null)
-            {
-                return BadRequest("No arguments were passed");
-            }
+                return BadRequest(Constants.MsgErrorArguments);
 
-            UniversityModel targetUniversity = universities.Where(x => x.Code == id).FirstOrDefault();
+            bool updated = uData.Update(university);
+            if (!updated)
+                return BadRequest(Constants.MsgError);
 
-            if(targetUniversity == null)
-            {
-                return BadRequest("University not found");
-            }
-
-            //no data is updated here, this is just an example
-            targetUniversity.Name = university.Name;
-            targetUniversity.Website = university.Website;
-
-            return Ok("Updated successfully!");
+            return Ok(Constants.MsgSuccess);
         }
 
         [HttpDelete]
         public IHttpActionResult Delete(string id)
         {
-            universities.Remove(universities.Where(x => x.Code == id).FirstOrDefault());
+            UniversityModel university = new UniversityModel()
+            {
+                Code = id
+            };
 
-            return Ok("Deleted successfully!");
+            bool deleted = uData.Delete(university);
+
+            if (!deleted)
+                return BadRequest(Constants.MsgError);
+
+            return Ok(Constants.MsgSuccess);
         }
     }
 }
