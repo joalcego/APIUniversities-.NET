@@ -39,7 +39,7 @@ namespace APIUniversities.Controllers
             return Ok(university);
         }
 
-        [HttpPost()]
+        [HttpPost]
         public IHttpActionResult Create([FromBody] UniversityModel university)
         {
             if(university == null)

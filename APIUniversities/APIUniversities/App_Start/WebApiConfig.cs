@@ -15,9 +15,15 @@ namespace APIUniversities
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "UniversitiesRoute",
+                routeTemplate: "api/universities/{id}",
+                defaults: new { controller="Universities", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "CareersRoute",
+                routeTemplate: "api/universities/{universityId}/{controller}/{careerId}",
+                defaults: new { controller = "Careers", careerId = RouteParameter.Optional }
             );
         }
     }

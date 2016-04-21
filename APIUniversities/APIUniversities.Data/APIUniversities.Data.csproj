@@ -52,6 +52,7 @@
     <Compile Include="Career.cs">
       <DependentUpon>UniversitiesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CareersData.cs" />
     <Compile Include="Cours.cs">
       <DependentUpon>UniversitiesModel.tt</DependentUpon>
     </Compile>
